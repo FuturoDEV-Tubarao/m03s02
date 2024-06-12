@@ -44,11 +44,10 @@ public class PokemonController {
         : ResponseEntity.notFound().build();
   }
 
-  /*
-      @GetMapping("/{number}")
-      public ResponseEntity<Pokemon> buscaPokemon() {
+  @DeleteMapping("/{numero}")
+  public ResponseEntity<Void> exclui(@PathVariable Integer numero) {
+    pokemonService.exclui(numero);
 
-      }
-  */
-
+    return ResponseEntity.noContent().build();
+  }
 }

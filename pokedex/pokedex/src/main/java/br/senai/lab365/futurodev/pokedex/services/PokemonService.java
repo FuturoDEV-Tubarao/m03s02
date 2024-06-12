@@ -43,4 +43,8 @@ public class PokemonService {
       return false;
     }
   }
+
+  public void exclui(Integer numero) {
+    repository.deleteById(numero);
+  }
 }
