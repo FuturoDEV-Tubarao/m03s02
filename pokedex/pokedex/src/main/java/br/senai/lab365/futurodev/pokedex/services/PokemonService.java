@@ -1,5 +1,6 @@
 package br.senai.lab365.futurodev.pokedex.services;
 
+import br.senai.lab365.futurodev.pokedex.dtos.PokemonAtualizadoDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonCapturadoDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonVistoDTO;
 import br.senai.lab365.futurodev.pokedex.models.Pokemon;
@@ -10,23 +11,36 @@ import org.springframework.stereotype.Service;
 @Service
 public class PokemonService {
 
-    private final PokemonRepository repository;
+  private final PokemonRepository repository;
 
-    public PokemonService(PokemonRepository repository) {
-        this.repository = repository;
+  public PokemonService(PokemonRepository repository) {
+    this.repository = repository;
+  }
+
+  public void cadastraVisto(PokemonVistoDTO pokemonVistoDTO) {
+    Pokemon pokemonVisto = PokemonMapping.dtoToModel(pokemonVistoDTO);
+
+    // TODO: validar se já existe registro com o mesmo numero. caso sim, retornar status 400 ou 409
+    repository.save(pokemonVisto);
+  }
+
+  public void cadastraCapturado(PokemonCapturadoDTO pokemonCapturadoDTO) {
+    Pokemon pokemonCapturado = PokemonMapping.dtoToModel(pokemonCapturadoDTO);
+    pokemonCapturado.setCapturado(true);
+
+    // TODO: validar se já existe registro com o mesmo numero e com campos de capturado preenchidos.
+    // caso sim, retornar status 400 ou 409. caso existir o registro, mas sem campos de capturado
+    // preenchidos, pode atualizar.
+    repository.save(pokemonCapturado);
+  }
+
+  public boolean atualiza(PokemonAtualizadoDTO pokemonAtualizadoDTO) {
+    if (repository.existsById(pokemonAtualizadoDTO.getNumero())) {
+      Pokemon pokemonAtualizado = PokemonMapping.dtoToModel(pokemonAtualizadoDTO);
+      repository.save(pokemonAtualizado);
+      return true;
+    } else {
+      return false;
     }
-
-    public void cadastraVisto(PokemonVistoDTO pokemonVistoDTO) {
-        Pokemon pokemonVisto = PokemonMapping.dtoToModel(pokemonVistoDTO);
-
-        // TODO: validar se já existe registro com o mesmo numero. caso sim, retornar status 401
-        repository.save(pokemonVisto);
-    }
-
-    public void cadastraCapturado(PokemonCapturadoDTO pokemonCapturadoDTO) {
-        Pokemon pokemonCapturado = PokemonMapping.dtoToModel(pokemonCapturadoDTO);
-        pokemonCapturado.setCapturado(true);
-
-        repository.save(pokemonCapturado);
-    }
+  }
 }
