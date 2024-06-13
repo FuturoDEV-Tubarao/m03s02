@@ -6,6 +6,7 @@ import br.senai.lab365.futurodev.pokedex.dtos.PokemonVistoDTO;
 import br.senai.lab365.futurodev.pokedex.models.Pokemon;
 import br.senai.lab365.futurodev.pokedex.repositories.PokemonRepository;
 import br.senai.lab365.futurodev.pokedex.utils.PokemonMapping;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,5 +47,9 @@ public class PokemonService {
 
   public void exclui(Integer numero) {
     repository.deleteById(numero);
+  }
+
+  public Optional<Pokemon> busca(Integer numero) {
+    return repository.findById(numero);
   }
 }

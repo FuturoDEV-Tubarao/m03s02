@@ -3,6 +3,7 @@ package br.senai.lab365.futurodev.pokedex.controllers;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonAtualizadoDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonCapturadoDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonVistoDTO;
+import br.senai.lab365.futurodev.pokedex.models.Pokemon;
 import br.senai.lab365.futurodev.pokedex.services.PokemonService;
 import jakarta.validation.Valid;
 import java.net.URI;
@@ -49,5 +50,13 @@ public class PokemonController {
     pokemonService.exclui(numero);
 
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping("/{numero}")
+  public ResponseEntity<Pokemon> busca(@PathVariable Integer numero) {
+    return pokemonService
+        .busca(numero)
+        .map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.notFound().build());
   }
 }
