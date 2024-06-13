@@ -1,11 +1,15 @@
 package br.senai.lab365.futurodev.pokedex.services;
 
+import static br.senai.lab365.futurodev.pokedex.utils.PokemonMapping.modelToDto;
+
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonAtualizadoDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonCapturadoDTO;
+import br.senai.lab365.futurodev.pokedex.dtos.PokemonPreviewDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonVistoDTO;
 import br.senai.lab365.futurodev.pokedex.models.Pokemon;
 import br.senai.lab365.futurodev.pokedex.repositories.PokemonRepository;
 import br.senai.lab365.futurodev.pokedex.utils.PokemonMapping;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +55,9 @@ public class PokemonService {
 
   public Optional<Pokemon> busca(Integer numero) {
     return repository.findById(numero);
+  }
+
+  public List<PokemonPreviewDTO> buscaTodos() {
+    return modelToDto(repository.findAll());
   }
 }
