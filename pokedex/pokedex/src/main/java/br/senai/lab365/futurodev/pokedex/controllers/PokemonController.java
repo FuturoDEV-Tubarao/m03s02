@@ -2,11 +2,13 @@ package br.senai.lab365.futurodev.pokedex.controllers;
 
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonAtualizadoDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonCapturadoDTO;
+import br.senai.lab365.futurodev.pokedex.dtos.PokemonPreviewDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonVistoDTO;
 import br.senai.lab365.futurodev.pokedex.models.Pokemon;
 import br.senai.lab365.futurodev.pokedex.services.PokemonService;
 import jakarta.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,5 +60,10 @@ public class PokemonController {
         .busca(numero)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
+  @GetMapping
+  public ResponseEntity<List<PokemonPreviewDTO>> buscaTodos() {
+    return ResponseEntity.ok(pokemonService.buscaTodos());
   }
 }

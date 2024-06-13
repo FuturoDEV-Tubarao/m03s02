@@ -2,8 +2,11 @@ package br.senai.lab365.futurodev.pokedex.utils;
 
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonAtualizadoDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonCapturadoDTO;
+import br.senai.lab365.futurodev.pokedex.dtos.PokemonPreviewDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonVistoDTO;
 import br.senai.lab365.futurodev.pokedex.models.Pokemon;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PokemonMapping {
 
@@ -49,5 +52,23 @@ public class PokemonMapping {
     model.setCapturado(dto.getCapturado());
 
     return model;
+  }
+
+  public static PokemonPreviewDTO modelToDto(Pokemon model) {
+    PokemonPreviewDTO dto = new PokemonPreviewDTO();
+
+    dto.setNumero(model.getNumero());
+    dto.setNome(model.getNome());
+    dto.setCapturado(model.isCapturado());
+
+    return dto;
+  }
+
+  public static List<PokemonPreviewDTO> modelToDto(List<Pokemon> model) {
+    List<PokemonPreviewDTO> listDto = new ArrayList<>();
+
+    model.forEach(pokemon -> listDto.add(modelToDto(pokemon)));
+
+    return listDto;
   }
 }
