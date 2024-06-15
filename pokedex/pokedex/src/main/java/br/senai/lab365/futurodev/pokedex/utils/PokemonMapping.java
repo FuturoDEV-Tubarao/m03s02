@@ -4,6 +4,7 @@ import br.senai.lab365.futurodev.pokedex.dtos.PokemonAtualizadoDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonCapturadoDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonPreviewDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonVistoDTO;
+import br.senai.lab365.futurodev.pokedex.enums.Tipo;
 import br.senai.lab365.futurodev.pokedex.models.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class PokemonMapping {
     model.setNome(dto.getNome());
     model.setDescricao(dto.getDescricao());
     model.setImagem(dto.getImagem());
-    model.setTipo(dto.getTipo());
+    model.setTipo(Tipo.valueOf(dto.getTipo()));
     model.setCategoria(dto.getCategoria());
     model.setArea(dto.getArea());
     model.setAltura(dto.getAltura());
@@ -44,7 +45,7 @@ public class PokemonMapping {
     model.setNome(dto.getNome());
     if (dto.getDescricao() != null) model.setDescricao(dto.getDescricao());
     model.setImagem(dto.getImagem());
-    if (dto.getTipo() != null) model.setTipo(dto.getTipo());
+    if (dto.getTipo() != null) model.setTipo(Tipo.valueOf(dto.getTipo()));
     if (dto.getCategoria() != null) model.setCategoria(dto.getCategoria());
     model.setArea(dto.getArea());
     if (dto.getAltura() != null) model.setAltura(dto.getAltura());

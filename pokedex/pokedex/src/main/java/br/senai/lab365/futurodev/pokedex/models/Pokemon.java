@@ -1,106 +1,112 @@
 package br.senai.lab365.futurodev.pokedex.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import br.senai.lab365.futurodev.pokedex.enums.Tipo;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pokemon")
 public class Pokemon {
-    @Id
-    private int numero;
-    @Column(nullable = false, unique = true)
-    private String nome;
-    private String descricao;
-    @Column(nullable = false)
-    private String imagem;
-    private String tipo; // TODO: criar enum para o tipo
-    private String categoria;
-    @Column(nullable = false)
-    private String area;
-    private Double altura;
-    private Double peso;
-    @Column(nullable = false)
-    private boolean capturado;
+  @Id private int numero;
 
-    public int getNumero() {
-        return numero;
-    }
+  @Column(nullable = false, unique = true)
+  private String nome;
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
+  private String descricao;
 
-    public String getNome() {
-        return nome;
-    }
+  @Column(nullable = false)
+  private String imagem;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+  @Enumerated(value = EnumType.STRING)
+  private Tipo tipo;
 
-    public String getDescricao() {
-        return descricao;
-    }
+  private String categoria;
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+  @Column(nullable = false)
+  private String area;
 
-    public String getImagem() {
-        return imagem;
-    }
+  private Double altura;
+  private Double peso;
 
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
+  @Column(nullable = false)
+  private boolean capturado;
 
-    public String getTipo() {
-        return tipo;
-    }
+  public int getNumero() {
+    return numero;
+  }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+  public void setNumero(int numero) {
+    this.numero = numero;
+  }
 
-    public String getCategoria() {
-        return categoria;
-    }
+  public String getNome() {
+    return nome;
+  }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
 
-    public String getArea() {
-        return area;
-    }
+  public String getDescricao() {
+    return descricao;
+  }
 
-    public void setArea(String area) {
-        this.area = area;
-    }
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
 
-    public double getAltura() {
-        return altura;
-    }
+  public String getImagem() {
+    return imagem;
+  }
 
-    public void setAltura(double altura) {
-        this.altura = altura;
-    }
+  public void setImagem(String imagem) {
+    this.imagem = imagem;
+  }
 
-    public double getPeso() {
-        return peso;
-    }
+  public Tipo getTipo() {
+    return tipo;
+  }
 
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }
+  public void setTipo(Tipo tipo) {
+    this.tipo = tipo;
+  }
 
-    public boolean isCapturado() {
-        return capturado;
-    }
+  public String getCategoria() {
+    return categoria;
+  }
 
-    public void setCapturado(boolean capturado) {
-        this.capturado = capturado;
-    }
+  public void setCategoria(String categoria) {
+    this.categoria = categoria;
+  }
+
+  public String getArea() {
+    return area;
+  }
+
+  public void setArea(String area) {
+    this.area = area;
+  }
+
+  public double getAltura() {
+    return altura;
+  }
+
+  public void setAltura(double altura) {
+    this.altura = altura;
+  }
+
+  public double getPeso() {
+    return peso;
+  }
+
+  public void setPeso(double peso) {
+    this.peso = peso;
+  }
+
+  public boolean isCapturado() {
+    return capturado;
+  }
+
+  public void setCapturado(boolean capturado) {
+    this.capturado = capturado;
+  }
 }
