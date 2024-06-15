@@ -6,6 +6,8 @@ import br.senai.lab365.futurodev.pokedex.dtos.PokemonPreviewDTO;
 import br.senai.lab365.futurodev.pokedex.dtos.PokemonVistoDTO;
 import br.senai.lab365.futurodev.pokedex.models.Pokemon;
 import br.senai.lab365.futurodev.pokedex.services.PokemonService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -22,6 +24,17 @@ public class PokemonController {
     this.pokemonService = pokemonService;
   }
 
+  @Operation(
+      summary = "Cadastro de pokémon visto",
+      description =
+          "Cadastra pokémon que foi apenas visto, e não capturado, com apenas alguns dados.",
+      responses = {
+        @ApiResponse(responseCode = "201", description = "Pokémon visto cadastrado com sucesso."),
+        @ApiResponse(
+            responseCode = "409",
+            description = "Já existe um pokémon cadastrado com o mesmo número."),
+        @ApiResponse(responseCode = "400", description = "Dados inválidos de cadastro.")
+      })
   @PostMapping("/visto")
   public ResponseEntity<Void> cadastraVisto(@Valid @RequestBody PokemonVistoDTO pokemonVistoDTO) {
     pokemonService.cadastraVisto(pokemonVistoDTO);
@@ -30,6 +43,18 @@ public class PokemonController {
         .build();
   }
 
+  @Operation(
+      summary = "Cadastro de pokémon capturado",
+      description = "Cadastra pokémon que foi capturado, contendo todos os dados.",
+      responses = {
+        @ApiResponse(
+            responseCode = "201",
+            description = "Pokémon capturado cadastrado com sucesso."),
+        @ApiResponse(
+            responseCode = "409",
+            description = "Já existe um pokémon capturado cadastrado com o mesmo número."),
+        @ApiResponse(responseCode = "400", description = "Dados inválidos de cadastro.")
+      })
   @PostMapping("/capturado")
   public ResponseEntity<Void> cadastraCapturado(
       @Valid @RequestBody PokemonCapturadoDTO pokemonCapturadoDTO) {
